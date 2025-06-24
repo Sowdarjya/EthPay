@@ -32,9 +32,7 @@ const Card = ({ tx }) => {
   }, [tx.keyword]);
 
   return (
-    <div
-      className="bg-white/5 border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all duration-300 group overflow-hidden rounded-lg mb-4"
-    >
+    <div className="bg-white/5 border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all duration-300 group overflow-hidden rounded-lg mb-4">
       <div className="flex min-h-[160px]">
         {/* GIF Section */}
         <div className="w-40 h-40 flex-shrink-0">
@@ -56,8 +54,12 @@ const Card = ({ tx }) => {
               {tx.keyword}
             </span>
             <div className="text-right">
-              <div className="text-lg font-bold text-white">{tx.amount} ETH</div>
-              <div className="text-xs text-gray-400">{formatTimeAgo(tx.timestamp)}</div>
+              <div className="text-lg font-bold text-white">
+                {tx.amount} ETH
+              </div>
+              <div className="text-xs text-gray-400">
+                {formatTimeAgo(tx.timestamp)}
+              </div>
             </div>
           </div>
 
@@ -65,35 +67,37 @@ const Card = ({ tx }) => {
           <div className="space-y-2">
             <div className="flex items-center gap-2 text-sm">
               <span className="text-gray-400">From:</span>
-              <code className="text-green-400 bg-green-500/10 px-2 py-1 rounded text-xs">
+              <a
+                href={`https://sepolia.etherscan.io/address/${tx.from}`}
+                target="_blank"
+                className="text-green-400 bg-green-500/10 px-2 py-1 rounded text-xs"
+              >
                 {truncateAddress(tx.from)}
-              </code>
+              </a>
             </div>
             <div className="flex items-center gap-2 text-sm">
               <span className="text-gray-400">To:</span>
-              <code className="text-blue-400 bg-blue-500/10 px-2 py-1 rounded text-xs">
+              <a
+                href={`https://sepolia.etherscan.io/address/${tx.to}`}
+                target="_blank"
+                className="text-blue-400 bg-blue-500/10 px-2 py-1 rounded text-xs"
+              >
                 {truncateAddress(tx.to)}
-              </code>
+              </a>
             </div>
           </div>
 
           {/* Message */}
           {tx.message && (
             <div className="bg-white/5 rounded-lg p-3 border border-white/10">
-              <p className="text-gray-300 text-sm leading-relaxed">"{tx.message}"</p>
+              <p className="text-gray-300 text-sm leading-relaxed">
+                "{tx.message}"
+              </p>
             </div>
           )}
 
           {/* Transaction Hash */}
           <div className="flex items-center justify-between pt-2 border-t border-white/10">
-            <a
-              href={`https://etherscan.io/tx/${tx.id}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-xs text-gray-400 hover:text-blue-400 transition-colors font-mono"
-            >
-              {truncateAddress(tx.id)}
-            </a>
             <div className="flex items-center gap-1">
               <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
               <span className="text-xs text-green-400">Confirmed</span>

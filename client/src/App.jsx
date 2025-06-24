@@ -3,6 +3,8 @@ import Header from "./components/Header";
 import { TransactionContext } from "./context/TransactionContext";
 import Hero from "./components/Hero";
 import Transactions from "./components/Transactions";
+import Features from "./components/Features";
+import About from "./components/About";
 
 const App = () => {
   return (
@@ -10,6 +12,8 @@ const App = () => {
       <Header />
       <Hero />
       <Transactions />
+      <Features />
+      <About />
     </div>
   );
 };
