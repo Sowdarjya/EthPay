@@ -16,13 +16,11 @@ const Hero = () => {
     connectWallet,
     connectedAccount,
     formData,
-    setFormData,
     handleChange,
     sendTransaction,
+    isLoading,
   } = useContext(TransactionContext);
 
-  // Dummy state for demo (replace with real logic as needed)
-  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [txHash, setTxHash] = useState("");
   const [balance] = useState(1.2345); // Replace with real balance logic
@@ -30,21 +28,24 @@ const Hero = () => {
   const isConnected = !!connectedAccount;
   const account = connectedAccount;
 
-  const handleSubmit = (e) => {
-    const { addressTo, amount, keyword, message } = formData;
-
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (!addressTo || !amount || !keyword || !message) {
+    const { addressTo, amount, keyword } = formData;
+    if (!addressTo || !amount || !keyword) {
       setError("Please fill in all required fields.");
       return;
     }
-
-    sendTransaction();
+    setError("");
+    try {
+      await sendTransaction();
+      setTxHash("pending"); // You can update this with the real tx hash if available
+    } catch (err) {
+      setError("Transaction failed.");
+    }
   };
 
   return (
-    <section className="pt-32 pb-20 px-4">
+    <section className="pt-32 pb-20 px-4 ">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Hero Content - Left Side */}
@@ -163,8 +164,11 @@ const Hero = () => {
 
             {/* Transfer Form */}
             {isConnected && (
-              <div className="border-0 shadow-2xl bg-white/10 backdrop-blur-md border border-white/20 rounded-xl">
-                <div className="pb-4 pt-6 px-6">
+              <form
+                className="border-0 shadow-2xl bg-white/10 backdrop-blur-md border border-white/20 rounded-xl px-6 pb-6 pt-6 space-y-4"
+                onSubmit={handleSubmit}
+              >
+                <div>
                   <div className="flex items-center gap-2 text-white text-xl font-semibold">
                     <Send className="h-5 w-5" />
                     Send ETH
@@ -244,7 +248,6 @@ const Hero = () => {
                     !formData.amount ||
                     !formData.keyword
                   }
-                  onClick={handleSubmit}
                   className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 py-4 rounded-lg text-white font-semibold flex items-center justify-center gap-2 transition-colors disabled:opacity-60"
                 >
                   {isLoading ? (
@@ -259,32 +262,29 @@ const Hero = () => {
                     </>
                   )}
                 </button>
-              </div>
-            )}
-
-            {/* Status Messages */}
-            {error && (
-              <div className="flex items-center gap-2 bg-red-500/10 border border-red-500/30 text-red-400 px-4 py-3 rounded-lg">
-                <AlertCircle className="h-4 w-4" />
-                <span>{error}</span>
-              </div>
-            )}
-
-            {txHash && (
-              <div className="flex items-center gap-2 bg-green-500/10 border border-green-500/30 text-green-400 px-4 py-3 rounded-lg">
-                <CheckCircle className="h-4 w-4" />
-                <span>
-                  🎉 Transaction successful!
-                  <a
-                    href={`https://etherscan.io/tx/${txHash}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="ml-2 underline hover:no-underline font-semibold"
-                  >
-                    View on Etherscan →
-                  </a>
-                </span>
-              </div>
+                {error && (
+                  <div className="flex items-center gap-2 bg-red-500/10 border border-red-500/30 text-red-400 px-4 py-3 rounded-lg mt-2">
+                    <AlertCircle className="h-4 w-4" />
+                    <span>{error}</span>
+                  </div>
+                )}
+                {txHash && (
+                  <div className="flex items-center gap-2 bg-green-500/10 border border-green-500/30 text-green-400 px-4 py-3 rounded-lg mt-2">
+                    <CheckCircle className="h-4 w-4" />
+                    <span>
+                      🎉 Transaction successful!
+                      <a
+                        href={`https://etherscan.io/tx/${txHash}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="ml-2 underline hover:no-underline font-semibold"
+                      >
+                        View on Etherscan →
+                      </a>
+                    </span>
+                  </div>
+                )}
+              </form>
             )}
           </div>
         </div>
