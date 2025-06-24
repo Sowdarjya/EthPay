@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { Send, Menu } from "lucide-react";
 import { TransactionContext } from "../context/TransactionContext";
 

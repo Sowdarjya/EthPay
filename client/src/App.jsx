@@ -1,6 +1,4 @@
-import React, { useContext } from "react";
 import Header from "./components/Header";
-import { TransactionContext } from "./context/TransactionContext";
 import Hero from "./components/Hero";
 import Transactions from "./components/Transactions";
 import Features from "./components/Features";

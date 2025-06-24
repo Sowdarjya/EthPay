@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 const truncateAddress = (addr) =>
   addr ? addr.slice(0, 6) + "..." + addr.slice(-4) : "";
