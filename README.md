@@ -11,10 +11,6 @@ EthPay is a modern, secure, and user-friendly decentralized application (dApp) f
 - **Real-time Tracking:** Monitor transaction status instantly.
 - **Privacy First:** Only essential data is stored for processing.
 
-## Screenshots
-
-![EthPay Screenshot](public/vite.svg) <!-- Replace with actual screenshot if available -->
-
 ## Getting Started
 
 ### Prerequisites
@@ -27,7 +23,7 @@ EthPay is a modern, secure, and user-friendly decentralized application (dApp) f
 #### 1. Clone the repository
 
 ```bash
-git clone https://github.com/yourusername/EthPay.git
+git clone https://github.com/Sowdarjya/EthPay.git
 cd EthPay
 ```
 
