@@ -10,7 +10,6 @@ const Header = () => {
     <nav className="fixed top-0 w-full z-50 bg-gradient-to-r from-slate-900/80 via-purple-900/80 to-slate-900/80 backdrop-blur-md border-b border-white/10 shadow-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          {/* Logo */}
           <div className="flex items-center space-x-2">
             <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg flex items-center justify-center shadow">
               <Send className="h-4 w-4 text-white" />
@@ -19,7 +18,6 @@ const Header = () => {
               EthPay
             </span>
           </div>
-          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             <a
               href="#features"
@@ -33,12 +31,7 @@ const Header = () => {
             >
               How it Works
             </a>
-            <a
-              href="#stats"
-              className="text-gray-300 hover:text-blue-400 transition-colors font-medium"
-            >
-              Stats
-            </a>
+
             {!connectedAccount ? (
               <button
                 className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 px-5 py-2 rounded-lg text-white font-semibold shadow transition-colors"
@@ -82,13 +75,7 @@ const Header = () => {
               >
                 How it Works
               </a>
-              <a
-                href="#stats"
-                className="text-gray-300 hover:text-blue-400 transition-colors font-medium"
-                onClick={() => setMobileOpen(false)}
-              >
-                Stats
-              </a>
+
               {!connectedAccount ? (
                 <button
                   className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 px-5 py-2 rounded-lg text-white font-semibold shadow transition-colors"
